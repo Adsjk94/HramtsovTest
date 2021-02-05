@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.madhram.hramtsovtest.data.model.CompanyResponse
+import com.madhram.hramtsovtest.data.model.Results
 import com.madhram.hramtsovtest.data.repositore.MainRepositore
 import com.madhram.hramtsovtest.utils.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,14 +13,14 @@ import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(private val mainRepositore: MainRepositore) : ViewModel() {
 
-    private val companies = MutableLiveData<Resource<List<CompanyResponse>>>()
+    private val companies = MutableLiveData<Resource<List<Results>>>()
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        FetchCompanies()
+        fetchCompanies()
     }
 
-    private fun FetchCompanies() {
+    private fun fetchCompanies() {
         companies.postValue(Resource.loading(null))
         compositeDisposable.add(
                 mainRepositore.getCompanies()
@@ -28,7 +29,7 @@ class MainViewModel(private val mainRepositore: MainRepositore) : ViewModel() {
                         .subscribe({companiesList ->
                             companies.postValue(Resource.success(companiesList))
                         },{
-                            companies.postValue(Resource.error( null))
+                            companies.postValue(Resource.error(null))
                         })
         )
     }
@@ -38,6 +39,6 @@ class MainViewModel(private val mainRepositore: MainRepositore) : ViewModel() {
         compositeDisposable.dispose()
     }
 
-    fun getCompanies(): LiveData<Resource<List<CompanyResponse>>> = companies
+    fun getCompanies(): LiveData<Resource<List<Results>>> = companies
 
 }

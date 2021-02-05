@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.madhram.hramtsovtest.data.api.ApiHelper
 import com.madhram.hramtsovtest.data.api.ApiServiceImp
 import com.madhram.hramtsovtest.data.model.CompanyResponse
+import com.madhram.hramtsovtest.data.model.Results
 import com.madhram.hramtsovtest.ui.base.ViewModelFactory
 import com.madhram.hramtsovtest.ui.main.adapter.MainAdapter
 import com.madhram.hramtsovtest.ui.main.viewmodel.MainViewModel
@@ -29,13 +30,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupUi()
+        setupui()
         setupViewModel()
         setupObserver()
 
     }
 
-    fun setupUi(){
+    fun setupui(){
         rwcompanies.layoutManager = LinearLayoutManager(this)
         adapter = MainAdapter(arrayListOf())
         rwcompanies.addItemDecoration(
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun renderList(companies: List<CompanyResponse>){
+    fun renderList(companies: List<Results>){
         adapter.addData(companies)
         adapter.notifyDataSetChanged()
     }

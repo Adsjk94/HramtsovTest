@@ -4,14 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Results (
 
-    @SerializedName("id")
-    val id: String,
+        @SerializedName("id")
+        val id: Int,
 
-    @SerializedName("name")
-    val name: String,
+        @SerializedName("name")
+        val name: String,
 
-    @SerializedName("img")
-    val img: String,
+        @SerializedName("image")
+        val img: String,
+
 )
 
 
